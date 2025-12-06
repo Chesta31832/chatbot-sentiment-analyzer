@@ -1,63 +1,74 @@
 # Chatbot with Sentiment Analysis
 
-A Python-based chatbot that conducts conversations and performs real-time sentiment analysis on user messages.
+A Python-based conversational chatbot that performs real-time sentiment analysis on user messages. This project analyzes emotions in conversations and provides insights into the overall conversation mood.
 
 ## Features
 
-### Tier 1 (Mandatory) ✅
-- Full conversation history tracking
-- Overall conversation sentiment analysis
-- Clear emotional direction indication
+- **Real-time Sentiment Analysis**: Analyzes each user message using VADER sentiment analysis.
+- **Dynamic Responses**: The chatbot adapts its responses based on the detected sentiment (Positive, Negative, Neutral).
+- **Conversation Tracking**: Maintains a history of the conversation and calculates overall sentiment trends.
+- **Visual Feedback**: Uses color-coded terminal output to indicate sentiment (Green for positive, Red for negative, Yellow for neutral).
+- **Summary Statistics**: Provides a conversation summary with sentiment trends upon exit.
 
-### Tier 2 (Additional Credit) ✅
-- Statement-level sentiment analysis for each message
-- Real-time sentiment display
-- Sentiment trend analysis and mood shift detection
+## Project Structure
 
-## Technologies Used
-
-- **Python 3.8+**: Core programming language
-- **VADER Sentiment**: Primary sentiment analysis (optimized for social media/conversational text)
-- **TextBlob**: Secondary sentiment validation
-- **Colorama**: Terminal color output for better UX
-- **Pytest**: Unit testing framework
+```
+chatbot-sentiment-analyzer/
+├── src/
+│   ├── __init__.py
+│   ├── chatbot.py              # Rule-based chatbot logic
+│   ├── conversation_manager.py # Manages history and statistics
+│   ├── sentiment_analyzer.py   # VADER analysis wrapper
+│   └── utils.py                # UI and formatting utilities
+├── tests/                      # Unit tests
+├── main.py                     # Application entry point
+├── requirements.txt            # Project dependencies
+└── README.md
+```
 
 ## Installation
 
-```bash
-# Clone the repository
-git clone <repository-url>
-cd chatbot-sentiment-analyzer
+1. **Clone the repository** (if you haven't already):
+   ```bash
+   git clone https://github.com/Chesta31832/chatbot-sentiment-analyzer.git
+   cd chatbot-sentiment-analyzer
+   ```
 
-# Install dependencies
-pip install -r requirements.txt
+2. **Create a virtual environment** (optional but recommended):
+   ```bash
+   python -m venv .venv
+   # Windows
+   .venv\Scripts\activate
+   # macOS/Linux
+   source .venv/bin/activate
+   ```
 
-# Download TextBlob corpora
-python -m textblob.download_corpora
-```
+3. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## How to Run
+## Usage
+
+Run the main application:
 
 ```bash
 python main.py
 ```
 
-Type your messages and the chatbot will respond. Type 'quit', 'exit', or 'bye' to end the conversation and view the final sentiment analysis.
+Type your messages to chat with the bot. Type `quit`, `exit`, or `bye` to end the conversation and see the summary.
 
-## Sentiment Logic
+## Testing
 
-### Individual Message Analysis (Tier 2)
-- Uses VADER (Valence Aware Dictionary and sEntiment Reasoner)
-- Compound score ranges: -1 (most negative) to +1 (most positive)
-- Classification:
-  - Positive: compound score ≥ 0.05
-  - Negative: compound score ≤ -0.05
-  - Neutral: -0.05 < compound score < 0.05
+Run the test suite to ensure everything is working correctly:
 
-### Overall Conversation Sentiment (Tier 1)
-- Calculates weighted average of all message sentiments
-- Provides sentiment trend analysis
-- Detects mood shifts (improving/declining/stable)
+```bash
+pytest
+```
 
-## Project Structure
+## Technologies Used
 
+- **Python 3.x**
+- **VADER Sentiment**: For lexicon and rule-based sentiment analysis.
+- **Colorama**: For cross-platform colored terminal text.
+- **Pytest**: For unit testing.
