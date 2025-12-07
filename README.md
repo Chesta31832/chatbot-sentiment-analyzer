@@ -1,74 +1,161 @@
-# Chatbot with Sentiment Analysis
+# 🤖 Chatbot With Sentiment Analysis
 
-A Python-based conversational chatbot that performs real-time sentiment analysis on user messages. This project analyzes emotions in conversations and provides insights into the overall conversation mood.
+A conversational AI system that maintains full dialogue history and performs conversation-level and message-level sentiment analysis.
+This project fulfills **Tier 1 (mandatory)** and **Tier 2 (additional credit)** requirements of the assignment.
 
-## Features
+🌐 **Live Demo:**
+[https://chatbot-sentiment-analyzer-gjqyayywrxbgftquzs72td.streamlit.app/](https://chatbot-sentiment-analyzer-gjqyayywrxbgftquzs72td.streamlit.app/)
 
-- **Real-time Sentiment Analysis**: Analyzes each user message using VADER sentiment analysis.
-- **Dynamic Responses**: The chatbot adapts its responses based on the detected sentiment (Positive, Negative, Neutral).
-- **Conversation Tracking**: Maintains a history of the conversation and calculates overall sentiment trends.
-- **Visual Feedback**: Uses color-coded terminal output to indicate sentiment (Green for positive, Red for negative, Yellow for neutral).
-- **Summary Statistics**: Provides a conversation summary with sentiment trends upon exit.
+---
 
-## Project Structure
+## 📌 Features
+
+### ✅ Tier 1 — Conversation-Level Sentiment Analysis
+*   **Tracks the full conversation** between the user and chatbot.
+*   **Computes overall sentiment** at the end:
+    *   Positive
+    *   Neutral
+    *   Negative
+*   Uses averaged sentiment polarity across all user messages.
+
+### ⭐ Tier 2 — Statement-Level Sentiment Analysis (Implemented)
+*   **Performs sentiment classification** for every individual user message.
+*   **Displays results in real time**.
+*   Categorizes message polarity using thresholds.
+
+### (Bonus) Mood Trend Summary:
+*   Detects whether user’s mood **improved**, **worsened**, or **stayed stable** over the conversation.
+
+---
+
+## 🧠 Chatbot Logic
+*   **Lightweight rule-based and sentiment-influenced** conversation handling.
+*   Responses are **contextual** and maintain conversation history.
+
+---
+
+## 🎨 UI (Streamlit)
+*   Clean, interactive web interface.
+*   Real-time chat panel.
+*   Sentiment dashboard.
+*   Final summarized sentiment report.
+
+---
+
+## 🚀 Deployment
+The project is deployed using **Streamlit Cloud**.
+
+**Live app:**
+👉 [https://chatbot-sentiment-analyzer-gjqyayywrxbgftquzs72td.streamlit.app/](https://chatbot-sentiment-analyzer-gjqyayywrxbgftquzs72td.streamlit.app/)
+
+Deployment copies the repository directly into Streamlit Cloud and launches using `streamlit run app.py`.
+
+---
+
+## 🛠️ Tech Stack
+
+| Component | Technology |
+| :--- | :--- |
+| **Frontend/UI** | Streamlit |
+| **Chat Logic** | Python |
+| **Sentiment Analysis** | VADER (Valence Aware Dictionary and sEntiment Reasoner) |
+| **Storage** | In-memory conversation store |
+| **Deployment** | Streamlit Cloud |
+
+---
+
+## 📂 Project Structure
 
 ```
 chatbot-sentiment-analyzer/
+├── app.py                # Streamlit UI and chat interface
+├── main.py               # CLI Entry Point
 ├── src/
 │   ├── __init__.py
-│   ├── chatbot.py              # Rule-based chatbot logic
-│   ├── conversation_manager.py # Manages history and statistics
-│   ├── sentiment_analyzer.py   # VADER analysis wrapper
-│   └── utils.py                # UI and formatting utilities
-├── tests/                      # Unit tests
-├── main.py                     # Application entry point
-├── requirements.txt            # Project dependencies
+│   ├── chatbot.py            # Chatbot response logic
+│   ├── sentiment_analyzer.py # Tier 1 & Tier 2 sentiment logic
+│   ├── conversation_manager.py # History & Stats
+│   └── utils.py              # Helpers & preprocessing
+├── tests/
+│   ├── test_chatbot.py
+│   └── test_sentiment.py     # Unit tests
+├── requirements.txt
 └── README.md
 ```
 
-## Installation
+---
 
-1. **Clone the repository** (if you haven't already):
-   ```bash
-   git clone https://github.com/Chesta31832/chatbot-sentiment-analyzer.git
-   cd chatbot-sentiment-analyzer
-   ```
+## ▶️ How to Run Locally
 
-2. **Create a virtual environment** (optional but recommended):
-   ```bash
-   python -m venv .venv
-   # Windows
-   .venv\Scripts\activate
-   # macOS/Linux
-   source .venv/bin/activate
-   ```
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/Chesta31832/chatbot-sentiment-analyzer.git
+    cd chatbot-sentiment-analyzer
+    ```
 
-3. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+2.  **Install dependencies**
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-## Usage
+3.  **Run the Streamlit app**
+    ```bash
+    streamlit run app.py
+    ```
 
-Run the main application:
+    The app will open automatically in your browser at: `http://localhost:8501`
 
-```bash
-python main.py
-```
+---
 
-Type your messages to chat with the bot. Type `quit`, `exit`, or `bye` to end the conversation and see the summary.
+## ❤️ Sentiment Analysis Logic
 
-## Testing
+### Message-Level Sentiment (Tier 2)
+Each user message is analyzed individually using VADER:
+*   **Polarity < –0.05** → Negative
+*   **–0.05 ≤ Polarity ≤ 0.05** → Neutral
+*   **Polarity > 0.05** → Positive
 
-Run the test suite to ensure everything is working correctly:
+These results are displayed alongside each message.
 
+### Conversation-Level Sentiment (Tier 1)
+At the end:
+1.  Polarity scores of all user messages are averaged.
+2.  Final sentiment is categorized as:
+    *   **Positive**
+    *   **Neutral**
+    *   **Negative**
+3.  Displayed as the official total sentiment result for the full dialogue.
+
+### 🌀 Mood Trend (Bonus Feature)
+A simple slope calculation detects whether sentiment:
+*   📈 **Improved**
+*   📉 **Declined**
+*   ➖ **Stayed steady**
+
+Displayed in the final report.
+
+---
+
+## 🧪 Tests (Optional)
+Sample test included:
 ```bash
 pytest
 ```
+Covers:
+*   Sentiment thresholds
+*   Conversation-level aggregation
+*   Handling edge cases (empty/neutral messages)
 
-## Technologies Used
+---
 
-- **Python 3.x**
-- **VADER Sentiment**: For lexicon and rule-based sentiment analysis.
-- **Colorama**: For cross-platform colored terminal text.
-- **Pytest**: For unit testing.
+## 🌟 Additional Enhancements
+Optional features implemented for bonus credit:
+*   Mood trend summarization
+*   Clean Streamlit UI
+*   Conversation state persistence
+*   Modular production-style code layout
+
+---
+
+## 📜 License
+MIT License
